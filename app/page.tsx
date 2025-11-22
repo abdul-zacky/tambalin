@@ -105,5 +105,5 @@ export default function Home() {
         onClose={() => setIsEmergencyModalOpen(false)}
       />
     </div>
-  );
+  )
 }
