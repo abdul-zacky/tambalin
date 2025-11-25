@@ -30,6 +30,7 @@ export interface Shop {
   id: string;
   name: string;
   description: string;
+  address?: string;
   latitude: number;
   longitude: number;
   whatsapp_number: string;
@@ -79,6 +80,20 @@ export interface ApiResponse<T> {
   data?: T;
   error?: string;
   message?: string;
+}
+
+// Review Types
+export interface Review {
+  id: string;
+  shop_id: string;
+  user_id: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+  user?: {
+    full_name: string;
+    email: string;
+  };
 }
 
 // WhatsApp Message Types

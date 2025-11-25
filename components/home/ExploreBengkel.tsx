@@ -65,7 +65,7 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
         <p className="text-[#274b76]/70">{error}</p>
         <button
           onClick={fetchNearbyShops}
-          className="mt-4 px-6 py-3 bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white rounded-xl hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          className="mt-4 px-6 py-3 bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white rounded-xl hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
         >
           Coba Lagi
         </button>
@@ -108,7 +108,7 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
             <Link
               key={shop.id}
               href={`/bengkel/${shop.id}`}
-              className="bg-white/80 backdrop-blur-sm border border-[#274b76]/10 rounded-2xl p-5 hover:border-[#274b76]/30 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="bg-white/80 backdrop-blur-sm border border-[#274b76]/10 rounded-2xl p-5 hover:border-[#274b76]/30 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
             >
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-semibold text-lg text-[#274b76] line-clamp-1">
@@ -135,7 +135,7 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
                   : 'Lokasi tersedia'}
               </div>
 
-              <button className="mt-3 w-full bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white py-2 rounded-xl text-sm font-medium hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-md hover:shadow-lg">
+              <button className="mt-3 w-full bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white py-2 rounded-xl text-sm font-medium hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
                 Lihat Detail
               </button>
             </Link>
