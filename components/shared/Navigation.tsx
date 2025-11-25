@@ -12,6 +12,17 @@ export default function Navigation() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
+  const getFirstName = (): string => {
+    // Try profile first, then user metadata
+    const fullName = profile?.full_name || (user?.user_metadata?.full_name as string | undefined);
+
+    if (!fullName) {
+      return 'User';
+    }
+    const firstName = fullName.split(' ')[0].trim();
+    return firstName || 'User';
+  };
+
   // Close profile menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -99,10 +110,13 @@ export default function Navigation() {
                   className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-[#274b76]/5 transition-all duration-300"
                 >
                   <div className="w-8 h-8 bg-linear-to-br from-[#274b76] to-[#3d6ba8] rounded-full flex items-center justify-center text-white font-semibold">
-                    {profile?.full_name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
+                    {(profile?.full_name || (user?.user_metadata?.full_name as string | undefined))?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
                   </div>
                   <span className="text-sm font-medium text-[#274b76]">
-                    {profile?.full_name || user.email?.split('@')[0]}
+                    {(() => {
+                      const firstName = getFirstName();
+                      return firstName !== 'User' ? firstName : user.email?.split('@')[0];
+                    })()}
                   </span>
                   <svg
                     className={`w-4 h-4 text-[#274b76] transition-transform duration-200 ${
@@ -120,7 +134,7 @@ export default function Navigation() {
                   <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-lg rounded-xl shadow-xl border border-[#274b76]/10 py-2 z-50">
                     <div className="px-4 py-3 border-b border-[#274b76]/10">
                       <p className="text-sm font-medium text-[#274b76]">
-                        {profile?.full_name || 'User'}
+                        Hai, {getFirstName()}
                       </p>
                       <p className="text-xs text-[#274b76]/60 mt-1">
                         {user.email}
@@ -142,9 +156,10 @@ export default function Navigation() {
                     </Link>
                     <div className="border-t border-[#274b76]/10 mt-2 pt-2">
                       <button
-                        onClick={() => {
-                          signOut();
+                        onClick={async () => {
+                          await signOut();
                           setShowProfileMenu(false);
+                          window.location.href = '/';
                         }}
                         className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                       >

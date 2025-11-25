@@ -8,6 +8,18 @@ export function Navbar() {
   const { user, profile, signOut } = useAuth()
   const router = useRouter()
 
+  const getFirstName = (fullName: string | null | undefined, email: string | null | undefined): string => {
+    if (fullName && fullName.trim()) {
+      const firstName = fullName.split(' ')[0].trim()
+      if (firstName) return firstName
+    }
+    if (email) {
+      const emailName = email.split('@')[0]
+      return emailName.charAt(0).toUpperCase() + emailName.slice(1)
+    }
+    return 'User'
+  }
+
   const handleSignOut = async () => {
     await signOut()
     router.push('/')
@@ -28,7 +40,7 @@ export function Navbar() {
             {user ? (
               <>
                 <span className="text-sm text-[#274b76]/80 font-medium">
-                  {profile?.full_name || profile?.email}
+                  {getFirstName(profile?.full_name, profile?.email)}
                   {profile?.role === 'admin' && (
                     <span className="ml-2 px-2 py-1 text-xs bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white rounded-full">
                       Admin
