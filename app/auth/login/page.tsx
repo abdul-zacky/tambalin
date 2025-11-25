@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
@@ -55,9 +56,28 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 via-white to-blue-100 px-4">
       <div className="w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-sm shadow-2xl rounded-2xl px-8 py-10 border border-[#274b76]/10">
-          <h1 className="text-3xl font-bold text-center mb-8 bg-linear-to-r from-[#274b76] to-[#3d6ba8] bg-clip-text text-transparent">
-            User Login
-          </h1>
+          {/* Logo and Brand */}
+          <div className="flex flex-col items-center mb-8">
+            <Link href="/" className="flex items-center gap-3 mb-4 hover:opacity-80 transition-opacity">
+              <Image
+                src="/images/logo.png"
+                alt="Tambalin Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
+              <span className="text-2xl font-bold bg-linear-to-r from-[#274b76] to-[#3d6ba8] bg-clip-text text-transparent">
+                Tambalin
+              </span>
+            </Link>
+            <h1 className="text-2xl font-bold text-center text-[#274b76]">
+              Masuk ke Akun Anda
+            </h1>
+            <p className="text-sm text-[#274b76]/60 mt-2 text-center">
+              Temukan bengkel terdekat dengan mudah
+            </p>
+          </div>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm">
@@ -101,15 +121,15 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-linear-to-r from-[#274b76] to-[#3d6ba8] hover:from-[#1e3a5f] hover:to-[#274b76] disabled:from-[#274b76]/50 disabled:to-[#3d6ba8]/50 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? 'Masuk...' : 'Masuk'}
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm">
             <p className="text-[#274b76]/70">
-              Don&apos;t have an account?{' '}
+              Belum punya akun?{' '}
               <Link href="/auth/signup" className="text-[#274b76] hover:text-[#1e3a5f] font-semibold">
-                Sign up
+                Daftar
               </Link>
             </p>
           </div>

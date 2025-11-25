@@ -48,8 +48,8 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-        <p className="mt-4 text-gray-600">Memuat bengkel terdekat...</p>
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#274b76]"></div>
+        <p className="mt-4 text-[#274b76]/70">Memuat bengkel terdekat...</p>
       </div>
     );
   }
@@ -57,15 +57,15 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
   if (error) {
     return (
       <div className="text-center py-12">
-        <div className="text-red-600 mb-4">
+        <div className="text-[#274b76] mb-4">
           <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <p className="text-gray-600">{error}</p>
+        <p className="text-[#274b76]/70">{error}</p>
         <button
           onClick={fetchNearbyShops}
-          className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          className="mt-4 px-6 py-3 bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white rounded-xl hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           Coba Lagi
         </button>
@@ -76,13 +76,13 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
   if (!userLocation) {
     return (
       <div className="text-center py-12">
-        <div className="text-gray-400 mb-4">
+        <div className="text-[#274b76]/40 mb-4">
           <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </div>
-        <p className="text-gray-600">Mengaktifkan lokasi untuk melihat bengkel terdekat...</p>
+        <p className="text-[#274b76]/70">Mengaktifkan lokasi untuk melihat bengkel terdekat...</p>
       </div>
     );
   }
@@ -90,42 +90,42 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
+        <h2 className="text-2xl font-bold text-[#274b76]">
           Bengkel Terdekat
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-[#274b76]/60">
           {shops.length} bengkel ditemukan
         </p>
       </div>
 
       {shops.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600">Belum ada bengkel terdaftar di area Anda.</p>
+          <p className="text-[#274b76]/70">Belum ada bengkel terdaftar di area Anda.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {shops.map((shop) => (
             <Link
               key={shop.id}
               href={`/bengkel/${shop.id}`}
-              className="border border-gray-200 rounded-lg p-4 hover:border-red-500 hover:shadow-md transition-all"
+              className="bg-white/80 backdrop-blur-sm border border-[#274b76]/10 rounded-2xl p-5 hover:border-[#274b76]/30 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               <div className="flex justify-between items-start mb-2">
-                <h3 className="font-semibold text-lg text-gray-900 line-clamp-1">
+                <h3 className="font-semibold text-lg text-[#274b76] line-clamp-1">
                   {shop.name}
                 </h3>
                 {shop.distance !== undefined && (
-                  <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full whitespace-nowrap ml-2">
+                  <span className="text-xs bg-linear-to-br from-blue-50 to-blue-100 text-[#274b76] px-2 py-1 rounded-full whitespace-nowrap ml-2 font-medium">
                     {shop.distance.toFixed(1)} km
                   </span>
                 )}
               </div>
 
-              <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+              <p className="text-sm text-[#274b76]/70 line-clamp-2 mb-3">
                 {shop.description}
               </p>
 
-              <div className="flex items-center text-sm text-gray-500">
+              <div className="flex items-center text-sm text-[#274b76]/60 mb-3">
                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -135,7 +135,7 @@ export default function ExploreBengkel({ userLocation }: ExploreBengkelProps) {
                   : 'Lokasi tersedia'}
               </div>
 
-              <button className="mt-3 w-full bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+              <button className="mt-3 w-full bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white py-2 rounded-xl text-sm font-medium hover:from-[#1e3a5f] hover:to-[#274b76] transition-all duration-300 shadow-md hover:shadow-lg">
                 Lihat Detail
               </button>
             </Link>
