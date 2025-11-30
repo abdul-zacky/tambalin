@@ -3,14 +3,14 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/contexts/auth-context'
-import { Navbar } from '@/components/navbar'
+import Navigation from '@/components/shared/Navigation'
 import Link from 'next/link'
 
 // Skeleton component for loading states
 function DashboardSkeleton() {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100">
-      <Navbar />
+      <Navigation />
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-linear-to-r from-[#1e3a5f] to-[#274b76] bg-clip-text text-transparent mb-2">
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100">
-      <Navbar />
+      <Navigation />
 
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
