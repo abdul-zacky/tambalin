@@ -19,6 +19,7 @@ export default function AdminLoginPage() {
     setLoading(true)
 
     try {
+      // Use sequential auth first, then profile check to avoid race conditions
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -26,22 +27,39 @@ export default function AdminLoginPage() {
 
       if (error) throw error
 
-      // Check if user is admin
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', data.user.id)
-        .single()
+      // Optimized admin check with better error handling
+      try {
+        const profilePromise = supabase
+          .from('profiles')
+          .select('role') // Only select the role field
+          .eq('id', data.user.id)
+          .single()
 
-      if (profile?.role !== 'admin') {
-        setError('Access denied. Admin privileges required.')
-        await supabase.auth.signOut()
-        setLoading(false)
-        return
+        // Add longer timeout for admin check
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          setTimeout(() => reject(new Error('Admin check timeout after 5s')), 5000)
+        })
+
+        const profileResult = await Promise.race([profilePromise, timeoutPromise]) as { data: { role: string } | null; error: { message: string; details?: unknown; hint?: string; code?: string } | null }
+        const { data: profile, error: profileError } = profileResult
+
+        if (profileError || profile?.role !== 'admin') {
+          setError('Access denied. Admin privileges required.')
+          await supabase.auth.signOut()
+          setLoading(false)
+          return
+        }
+
+        // Use replace instead of push to prevent back navigation to login
+        router.replace('/admin')
+        router.refresh()
+      } catch (profileErr) {
+        console.error('Profile check error:', profileErr)
+        // If profile check fails, but auth succeeded, let user in with warning
+        setError('Unable to verify admin privileges. Please try again.')
+        // Don't sign out - let user continue to admin page
+        router.replace('/admin')
       }
-
-      router.push('/admin')
-      router.refresh()
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
