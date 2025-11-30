@@ -37,7 +37,7 @@ export default function Home() {
 
             <button
               onClick={() => setIsEmergencyModalOpen(true)}
-              className="inline-flex items-center gap-3 bg-white text-[#274b76] px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-3 bg-white text-[#274b76] px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
