@@ -14,12 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      mechanics: {
+        Row: {
+          id: number
+          name: string
+          shop_id: number
+          specialty: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: never
+          name: string
+          shop_id: number
+          specialty?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: never
+          name?: string
+          shop_id?: number
+          specialty?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mechanics_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
           email: string | null
           full_name: string | null
           id: string
+          phone_number: string | null
           role: Database["public"]["Enums"]["user_role"]
           updated_at: string
         }
@@ -28,6 +61,7 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
+          phone_number?: string | null
           role?: Database["public"]["Enums"]["user_role"]
           updated_at?: string
         }
@@ -36,8 +70,87 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+          phone_number?: string | null
           role?: Database["public"]["Enums"]["user_role"]
           updated_at?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          id: number
+          user_id: string
+          shop_id: number
+          rating: number
+          comment: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: never
+          user_id: string
+          shop_id: number
+          rating: number
+          comment?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: never
+          user_id?: string
+          shop_id?: number
+          rating?: number
+          comment?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      shops: {
+        Row: {
+          id: number
+          name: string
+          description: string | null
+          latitude: number
+          longitude: number
+          photo_urls: string[] | null
+          whatsapp_number: string
+          created_at: string
+          updated_at: string | null
+        }
+        Insert: {
+          id?: never
+          name: string
+          description?: string | null
+          latitude: number
+          longitude: number
+          photo_urls?: string[] | null
+          whatsapp_number: string
+          created_at?: string
+          updated_at?: string | null
+        }
+        Update: {
+          id?: never
+          name?: string
+          description?: string | null
+          latitude?: number
+          longitude?: number
+          photo_urls?: string[] | null
+          whatsapp_number?: string
+          created_at?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
