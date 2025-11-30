@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/lib/contexts/auth-context'
-import { Navbar } from '@/components/navbar'
+import Navigation from '@/components/shared/Navigation'
 import Link from 'next/link'
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100">
-      <Navbar />
+      <Navigation />
 
       <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="text-center">

@@ -40,7 +40,7 @@ export default function Navigation() {
   }, [showProfileMenu]);
 
   return (
-    <nav className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-[#274b76]/10">
+    <nav className="bg-white/80 backdrop-blur-md shadow-lg border-b border-[#274b76]/10 relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -86,6 +86,18 @@ export default function Navigation() {
             >
               Tentang
             </Link>
+            {profile?.role === 'admin' && (
+              <Link
+                href="/admin"
+                className={`text-sm font-medium transition-all duration-300 ${
+                  pathname === '/admin'
+                    ? 'text-[#274b76] font-semibold'
+                    : 'text-[#274b76]/70 hover:text-[#274b76]'
+                }`}
+              >
+                Admin Dashboard
+              </Link>
+            )}
 
             {/* Auth Section */}
             {!user ? (
@@ -118,6 +130,11 @@ export default function Navigation() {
                       return firstName !== 'User' ? firstName : user.email?.split('@')[0];
                     })()}
                   </span>
+                  {profile?.role === 'admin' && (
+                    <span className="ml-1 px-2 py-1 text-xs bg-linear-to-r from-[#274b76] to-[#3d6ba8] text-white rounded-full">
+                      Admin
+                    </span>
+                  )}
                   <svg
                     className={`w-4 h-4 text-[#274b76] transition-transform duration-200 ${
                       showProfileMenu ? 'rotate-180' : ''
@@ -131,7 +148,7 @@ export default function Navigation() {
                 </button>
 
                 {showProfileMenu && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-lg rounded-xl shadow-xl border border-[#274b76]/10 py-2 z-50">
+                  <div className="absolute right-0 mt-2 w-56 bg-white backdrop-blur-lg rounded-xl shadow-xl border border-[#274b76]/10 py-2 z-50">
                     <div className="px-4 py-3 border-b border-[#274b76]/10">
                       <p className="text-sm font-medium text-[#274b76]">
                         Hai, {getFirstName()}
@@ -140,6 +157,15 @@ export default function Navigation() {
                         {user.email}
                       </p>
                     </div>
+                    {profile?.role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        className="block px-4 py-2 text-sm text-[#274b76]/70 hover:bg-[#274b76]/5 hover:text-[#274b76] transition-colors"
+                        onClick={() => setShowProfileMenu(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    )}
                     <Link
                       href="/profile"
                       className="block px-4 py-2 text-sm text-[#274b76]/70 hover:bg-[#274b76]/5 hover:text-[#274b76] transition-colors"
