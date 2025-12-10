@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { Shop } from '@/lib/types'
 import Link from 'next/link'
+import Navigation from '@/components/shared/Navigation'
 
 interface MechanicInput {
   name: string
@@ -217,15 +218,34 @@ export default function EditShopPage({ params }: { params: Promise<{ id: string 
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100">
+      <Navigation />
       <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-linear-to-r from-[#1e3a5f] to-[#274b76] bg-clip-text text-transparent">
-            Edit Shop
-          </h1>
-          <p className="text-[#274b76]/70 mt-2">
-            Update shop information
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-4xl font-bold bg-linear-to-r from-[#1e3a5f] to-[#274b76] bg-clip-text text-transparent">
+                Edit Shop
+              </h1>
+              <p className="text-[#274b76]/70 mt-2">
+                Update shop information
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Link
+                href="/admin"
+                className="px-6 py-3 text-[#274b76] bg-white hover:bg-blue-50 border-2 border-[#274b76] rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Back to Dashboard
+              </Link>
+              <Link
+                href="/admin/shops"
+                className="px-6 py-3 text-[#274b76] bg-white hover:bg-blue-50 border-2 border-[#274b76] rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                View All Shops
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Form */}

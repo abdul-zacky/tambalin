@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/contexts/auth-context'
 import Link from 'next/link'
 import { Shop } from '@/lib/types'
+import Navigation from '@/components/shared/Navigation'
 
 export default function AdminShopsPage() {
   const { profile, loading: authLoading } = useAuth()
@@ -107,6 +108,7 @@ export default function AdminShopsPage() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-blue-100">
+      <Navigation />
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
