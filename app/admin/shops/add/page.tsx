@@ -191,7 +191,7 @@ export default function AddShopPage() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
               placeholder="Enter shop name"
               required
             />
@@ -206,7 +206,7 @@ export default function AddShopPage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors resize-none"
+              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors resize-none text-[#1e3a5f] placeholder:text-[#274b76]/40"
               placeholder="Enter shop description"
             />
           </div>
@@ -222,7 +222,7 @@ export default function AddShopPage() {
                 step="any"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+                className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
                 placeholder="-6.2088"
                 required
               />
@@ -236,7 +236,7 @@ export default function AddShopPage() {
                 step="any"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+                className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
                 placeholder="106.8456"
                 required
               />
@@ -252,7 +252,7 @@ export default function AddShopPage() {
               type="text"
               value={whatsappNumber}
               onChange={(e) => setWhatsappNumber(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+              className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
               placeholder="6281234567890"
               required
             />
@@ -306,7 +306,7 @@ export default function AddShopPage() {
                       type="text"
                       value={mechanic.name}
                       onChange={(e) => handleMechanicChange(index, 'name', e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+                      className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
                       placeholder="Mechanic name"
                     />
                   </div>
@@ -315,7 +315,7 @@ export default function AddShopPage() {
                       type="text"
                       value={mechanic.specialty}
                       onChange={(e) => handleMechanicChange(index, 'specialty', e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors"
+                      className="w-full px-4 py-3 border-2 border-[#274b76]/20 rounded-xl focus:outline-none focus:border-[#274b76] transition-colors text-[#1e3a5f] placeholder:text-[#274b76]/40"
                       placeholder="Specialty (optional)"
                     />
                   </div>
