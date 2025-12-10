@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
     // Check admin authentication
     const admin = await isAdmin(request);
     if (!admin) {
+      console.error('Upload failed: Admin authentication failed');
       return NextResponse.json<ApiResponse<null>>(
         {
           success: false,
@@ -47,6 +48,8 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
+
+    console.log('Admin authenticated, processing upload...');
 
     const formData = await request.formData();
     const files = formData.getAll('files') as File[];
