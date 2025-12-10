@@ -8,15 +8,24 @@ import { ApiResponse } from '@/lib/types';
 async function isAdmin(request: NextRequest): Promise<boolean> {
   const supabase = await createClient();
 
-  const { data: { user }, error } = await supabase.auth.getUser();
+  // Use getSession instead of getUser for better reliability
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-  if (error || !user) return false;
+  if (sessionError || !session?.user) {
+    console.log('Admin check failed: No session', { sessionError });
+    return false;
+  }
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('role')
-    .eq('id', user.id)
+    .eq('id', session.user.id)
     .single();
+
+  if (profileError) {
+    console.log('Admin check failed: Profile error', { profileError });
+    return false;
+  }
 
   return profile?.role === 'admin';
 }

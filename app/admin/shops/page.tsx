@@ -37,7 +37,12 @@ export default function AdminShopsPage() {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch('/api/admin/shops')
+      const response = await fetch('/api/admin/shops', {
+        credentials: 'include', // IMPORTANT: Include cookies in the request
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       const result = await response.json()
 
       if (result.success) {
@@ -56,7 +61,11 @@ export default function AdminShopsPage() {
   const handleDelete = async (shopId: string) => {
     try {
       const response = await fetch(`/api/admin/shops/${shopId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        credentials: 'include', // IMPORTANT: Include cookies in the request
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
       const result = await response.json()
 

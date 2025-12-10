@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { setSessionCookies } from './actions'
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('')
@@ -26,6 +27,18 @@ export default function AdminLoginPage() {
       })
 
       if (error) throw error
+
+      // Set session cookies server-side for API routes to access
+      if (data.session) {
+        const cookieResult = await setSessionCookies(
+          data.session.access_token,
+          data.session.refresh_token
+        )
+
+        if (!cookieResult.success) {
+          console.error('Failed to set session cookies:', cookieResult.error)
+        }
+      }
 
       // Optimized admin check with better error handling
       try {
